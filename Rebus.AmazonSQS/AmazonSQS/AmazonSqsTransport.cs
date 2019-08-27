@@ -298,7 +298,7 @@ namespace Rebus.AmazonSQS
 
                         var destinationUrl = GetDestinationQueueUrlByName(batch.Key, context);
 
-                        foreach (var batchToSend in entries.Batch(10))
+                        foreach (var batchToSend in entries.Batch(_options.MessageBatchSize))
                         {
                             var request = new SendMessageBatchRequest(destinationUrl, batchToSend);
                             var response = await client.SendMessageBatchAsync(request);

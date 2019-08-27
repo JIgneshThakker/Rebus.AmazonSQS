@@ -36,6 +36,13 @@ namespace Rebus.Config
         public bool CreateQueues { get; set; }
 
         /// <summary>
+        /// Sets the MessageBatchSize for sending batch messages to SQS. 
+        /// Value of BatchSize can be set up to 10.
+        /// Defaults to <code>10</code>.
+        /// </summary>
+        public int MessageBatchSize { get; set; }
+
+        /// <summary>
         /// Default constructor of the exposed SQS transport options.
         /// </summary>
         public AmazonSQSTransportOptions()
@@ -43,6 +50,7 @@ namespace Rebus.Config
             ReceiveWaitTimeSeconds = 1;
             UseNativeDeferredMessages = true;
             CreateQueues = true;
+            MessageBatchSize = 10;
 
             GetOrCreateClient = (context, credentials, config) =>
             {
